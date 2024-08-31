@@ -97,6 +97,11 @@
   transform: translateY(20px);
   transition: opacity 0.5s ease-in, transform 0.5s ease-in;
 
+  .screen--intro.active & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   @media (min-width: $stop-scaling) {
     width: 509px;
     font-size: 24px;
@@ -136,11 +141,6 @@
       height: 1.1rem;
     }
   }
-}
-
-.screen--intro.active .intro__message {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .intro__label {
