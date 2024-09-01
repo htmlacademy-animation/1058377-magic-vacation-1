@@ -1,5 +1,12 @@
 .social-block {
   position: relative;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.5, 0.84, 0.8, 0.5);
+  transition-delay: 0.2s;
+
+  .loaded & {
+    transform: scale(1);
+  }
 
   &:hover {
     .social-block__list {
