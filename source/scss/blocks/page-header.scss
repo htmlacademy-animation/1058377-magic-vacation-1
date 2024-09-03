@@ -39,7 +39,7 @@
 
   .loaded & {
     transform: translateX(0);
-    transition: transform 0.3s cubic-bezier(0.5, 0.84, 0.8, 0.5);
+    transition: transform 0.3s $animationEaseOut;
   }
 
   @media (min-width: $stop-scaling) {
@@ -188,7 +188,7 @@
 
   .loaded & {
     opacity: 1;
-    transition: opacity 0.3s cubic-bezier(0.5, 0.84, 0.8, 0.5);
+    transition: opacity 0.3s $animationEaseOut;
     transition-delay: 0.2s;
   }
 
@@ -283,9 +283,10 @@
     }
 
     &.active {
-      &::after {
+      .loaded &::after {
         transform: scaleX(1);
         transform-origin: left;
+        transition-delay: 0.3s;
       }
     }
 
