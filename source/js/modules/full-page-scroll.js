@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import {Screens} from '../const/screens';
 
 export default class FullPageScroll {
   constructor() {
@@ -8,8 +9,10 @@ export default class FullPageScroll {
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
+    this.screenOverlay = document.querySelector('.screen-overlay');
 
-    this.activeScreen = 0;
+    this.activeScreen = Screens.MAIN;
+    this.previousScreen = null;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -41,14 +44,25 @@ export default class FullPageScroll {
 
   onUrlHashChanged() {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
+    this.previousScreen = (newIndex < 0) ? null : this.activeScreen;
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
   }
 
   changePageDisplay() {
-    this.changeVisibilityDisplay();
-    this.changeActiveMenuItem();
-    this.emitChangeDisplayEvent();
+    if(this.activeScreen === Screens.PRIZES && this.previousScreen === Screens.HISTORY) {
+      this.screenOverlay.classList.add("loading");
+      this.changeActiveMenuItem();
+      setTimeout(() => {
+        this.changeVisibilityDisplay();
+        this.emitChangeDisplayEvent();
+        this.screenOverlay.classList.remove("loading");
+      }, 400);
+    } else {
+      this.changeVisibilityDisplay();
+      this.changeActiveMenuItem();
+      this.emitChangeDisplayEvent();
+    }
   }
 
   changeVisibilityDisplay() {
