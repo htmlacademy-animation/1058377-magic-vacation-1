@@ -1,0 +1,48 @@
+@keyframes showButton {
+  0% {
+    max-width: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    max-width: 0;
+  }
+  100% {
+    max-width: 40rem;
+  }
+}
+
+@keyframes showButtonText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes textShow {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes bulletShow {
+  0% {
+    transform: scale(0);
+    color: $c-purple;
+  }
+  70% {
+    color: $c-purple;
+  }
+  100% {
+    transform: scale(1);
+    color: $c-light;
+  }
+}
