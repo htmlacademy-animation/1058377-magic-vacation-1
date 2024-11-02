@@ -132,22 +132,51 @@
 
 .form--result {
   .form__field {
-    width: calc(100% - 31rem);
-
-    @media (min-width: $stop-scaling) {
-      width: calc(100% - 310px);
+    width: 0;
+    visibility: hidden;
+    transition: visibility 0.1s ease, width 0.4s ease;
+    transition-delay: 1s;
+    &::placeholder {
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      transition-delay: 1.3s;
     }
 
-    @media (orientation: portrait) {
-      width: calc(100% - 5rem);
-    }
+    .screen--animation-active & {
+      width: calc(100% - 31rem);
+      visibility: visible;
 
-    @media (max-width: $tablet) and (orientation: landscape) {
-      width: calc(100% - 9rem);
-    }
+      &::placeholder {
+        opacity: 1;
+      }
 
-    @media (max-width: $mobile) and (orientation: landscape) {
-      width: calc(100% - 5rem);
+      @media (min-width: $stop-scaling) {
+        width: calc(100% - 310px);
+      }
+
+      @media (orientation: portrait) {
+        width: calc(100% - 5rem);
+      }
+
+      @media (max-width: $tablet) and (orientation: landscape) {
+        width: calc(100% - 9rem);
+      }
+
+      @media (max-width: $mobile) and (orientation: landscape) {
+        width: calc(100% - 5rem);
+      }
     }
+  }
+
+  .form__button {
+    animation: fadeIn ease 0.3s;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+  }
+
+  .form__button-text {
+    animation: fadeIn ease 0.3s;
+    animation-delay: 1.2s;
+    animation-fill-mode: both;
   }
 }

@@ -1,0 +1,16 @@
+.text__word {
+  display: inline-block;
+  margin: 0 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.text__word > span {
+  transform: translate3d(0, 1.25em, 0);
+  display: inline-block;
+}
+
+.text.active .text__word > span {
+  transform: translate3d(0, 0, 0);
+}
