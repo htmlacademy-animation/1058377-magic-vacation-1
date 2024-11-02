@@ -56,10 +56,16 @@
 .result__image-container {
   position: relative;
   display: block;
-  width: 100%;
-  max-width: 768px;
+  width: 768px;
   height: 100%;
   margin-top: 16em;
+  @media (max-width: $tablet){
+    margin-top: 12em;
+  }
+
+  @media (max-width: $mobile) {
+    margin-top: 12em;
+  }
 }
 
 .result__image--flamingo {
