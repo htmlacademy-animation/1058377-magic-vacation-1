@@ -1,5 +1,6 @@
 import throttle from 'lodash/throttle';
 import {Screens} from '../const/screens';
+import {animateText} from '../const/accentTypography.js';
 
 export default class FullPageScroll {
   constructor() {
@@ -50,6 +51,23 @@ export default class FullPageScroll {
   }
 
   changePageDisplay() {
+    this.destroyTitleAnimations();
+    if(this.activeScreen === Screens.MAIN) {
+      this.mainPageTitleAnimation = animateText(".intro__title");
+      this.mainPageDateAnimation = animateText(".intro__date", 1200, false);
+    }
+    if(this.activeScreen === Screens.HISTORY) {
+      this.historyPageTitleAnimation = animateText(".slider__item-title");
+    }
+    if(this.activeScreen === Screens.PRIZES) {
+      this.prizesPageTitleAnimation = animateText(".prizes__title");
+    }
+    if(this.activeScreen === Screens.RULES) {
+      this.rulesTitleAnimation = animateText(".rules__title");
+    }
+    if(this.activeScreen === Screens.GAME) {
+      this.gameTitleAnimation = animateText(".game__title");
+    }
     if(this.activeScreen === Screens.PRIZES && this.previousScreen === Screens.HISTORY) {
       this.screenOverlay.classList.add("loading");
       this.changeActiveMenuItem();
@@ -101,6 +119,27 @@ export default class FullPageScroll {
       this.activeScreen = Math.min(this.screenElements.length - 1, ++this.activeScreen);
     } else {
       this.activeScreen = Math.max(0, --this.activeScreen);
+    }
+  }
+
+  destroyTitleAnimations() {
+    if(this.mainPageTitleAnimation) {
+      this.mainPageTitleAnimation.destroyAnimation();
+    }
+    if(this.mainPageDateAnimation) {
+      this.mainPageDateAnimation.destroyAnimation();
+    }
+    if(this.historyPageTitleAnimation) {
+      this.historyPageTitleAnimation.destroyAnimation();
+    }
+    if(this.prizesPageTitleAnimation) {
+      this.prizesPageTitleAnimation.destroyAnimation();
+    }
+    if(this.rulesTitleAnimation) {
+      this.rulesTitleAnimation.destroyAnimation();
+    }
+    if(this.gameTitleAnimation) {
+      this.gameTitleAnimation.destroyAnimation();
     }
   }
 }

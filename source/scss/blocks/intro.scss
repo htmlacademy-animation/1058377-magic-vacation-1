@@ -96,7 +96,7 @@
   opacity: 0;
   transform: translateY(2.5rem);
   transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-  transition-delay: 0.4s;
+  transition-delay: 0.7s;
 
   .screen--intro.active & {
     opacity: 1;
