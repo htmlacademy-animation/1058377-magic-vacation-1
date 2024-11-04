@@ -295,6 +295,27 @@
       color: $c-purple;
       outline: none;
 
+      .blue & {
+        color: $c-light-blue;
+        &::after {
+          background-color: $c-light-blue;
+        }
+      }
+
+      .light-blue & {
+        color: $c-blue;
+        &::after {
+          background-color: $c-blue;
+        }
+      }
+
+      .dark-purple & {
+        color: $c-dark;
+        &::after {
+          background-color: $c-dark;
+        }
+      }
+
       &::after {
         transform: scaleX(1);
         transform-origin: left;

@@ -1,6 +1,10 @@
 .disclaimer {
-  color: $c-dark;
+  color: transparent;
   background-color: $c-light;
+  transition: color ease 0.3s;
+  .active & {
+    color: $c-dark;
+  }
 
   @media (max-width: $tablet) and (orientation: portrait) {
     font-weight: 400;

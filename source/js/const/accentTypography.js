@@ -37,7 +37,7 @@ class AccentTypographyBuild {
       return;
     }
     this._element.classList.add("text");
-    const text = this._element.textContent.trim().split(` `).filter(letter => letter !== "");
+    const text = this._element.textContent.trim().split(/\s+/).filter(letter => letter !== "");
     const content = text.reduce((fragmentParent, word, wordIndex) => {
       const wordElement = Array.from(word).reduce((fragment, letter, index) => {
         fragment.appendChild(this.createElement(letter, index));

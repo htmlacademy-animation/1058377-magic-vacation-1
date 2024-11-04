@@ -172,6 +172,30 @@
   height: 4rem;
   color: $c-dark;
 
+  .blue & {
+    color: $c-blue;
+  }
+
+  .light-blue & {
+    color: $c-light-blue;
+  }
+
+  .dark-purple & {
+    color: $c-purple;
+  }
+
+  &--next {
+    animation: fadeInToLeftAndRotate ease-in 0.3s;
+    animation-fill-mode: both;
+    animation-delay: 0.8s;
+  }
+
+  &--prev {
+    animation: fadeInToRightAndRotate ease-in 0.3s;
+    animation-fill-mode: both;
+    animation-delay: 0.8s;
+  }
+
   @media (min-width: $stop-scaling) {
     width: 40px;
     height: 40px;
@@ -210,12 +234,45 @@
     }
   }
 
+  .blue &:hover {
+    color: $c-light-blue;
+  }
+
+  .light-blue &:hover {
+    color: $c-blue;
+  }
+
+  .dark-purple &:hover {
+    color: $c-dark;
+  }
+
   &:focus {
     color: $c-purple;
     outline: none;
 
     &::before {
       border-color: $c-purple;
+    }
+  }
+
+  .blue &:focus {
+    color: $c-light-blue;
+    &::before {
+      border-color: $c-light-blue;
+    }
+  }
+
+  .light-blue &:focus {
+    color: $c-blue;
+    &::before {
+      border-color: $c-blue;
+    }
+  }
+
+  .dark-purple &:focus {
+    color: $c-dark;
+    &::before {
+      border-color: $c-dark;
     }
   }
 
@@ -228,6 +285,30 @@
       height: 100%;
       background-color: $c-purple;
       border-color: $c-purple;
+    }
+  }
+
+  .blue &:active,
+  .blue &:active:focus {
+    &::before {
+      background-color: $c-light-blue;
+      border-color: $c-light-blue;
+    }
+  }
+
+  .light-blue &:active,
+  .light-blue &:active:focus {
+    &::before {
+      background-color: $c-blue;
+      border-color: $c-blue;
+    }
+  }
+
+  .dark-purple &:active,
+  .dark-purple &:active:focus {
+    &::before {
+      background-color: $c-dark;
+      border-color: $c-dark;
     }
   }
 
@@ -249,6 +330,9 @@
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 4rem;
+  animation: fadeIn ease-in 0.3s;
+  animation-fill-mode: both;
+  animation-delay: 0.8s;
 
   @media (min-width: $stop-scaling) {
     bottom: 28px;
