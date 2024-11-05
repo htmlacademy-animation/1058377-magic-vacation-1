@@ -70,7 +70,7 @@
 
 .result__image--flamingo {
   position: absolute;
-  top: 5em;
+  top: 20%;
   left: 20%;
   z-index: 10;
   transform: translateY(10rem);
@@ -87,7 +87,7 @@
 
 .result__image--suitcase {
   position: absolute;
-  top: 0;
+  top: 1%;
   left: 25%;
   z-index: 5;
   animation: moveYAndScale ease-in-out 1s;
@@ -97,7 +97,7 @@
 
 .result__image--leaf-blue-1 {
   position: absolute;
-  top: 0;
+  top: 1%;
   left: 50%;
   animation: leaf-right ease-in-out 2s;
   animation-fill-mode: both;
@@ -106,7 +106,7 @@
 
 .result__image--leaf-blue-2 {
   position: absolute;
-  top: 6em;
+  top: 22%;
   left: 5%;
   animation: leaf-left ease-in-out 2s;
   animation-fill-mode: both;
@@ -115,7 +115,7 @@
 
 .result__image--leaf-green {
   position: absolute;
-  top: 9em;
+  top: 33%;
   left: 45%;
   animation: green-leaf ease-in-out 2s;
   animation-fill-mode: both;
@@ -125,6 +125,12 @@
 .result__title {
   margin: 0 auto 2rem;
   color: $c-light;
+
+  &--loose {
+    animation: fadeIn ease-in-out 0.5s;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+  }
 
   @media (min-width: $stop-scaling) {
     margin: 0 auto 20px;
@@ -215,6 +221,9 @@
     width: 4rem;
     height: 4rem;
     color: $c-dark;
+    animation: fadeInToLeftAndRotate ease-in 0.3s;
+    animation-fill-mode: both;
+    animation-delay: 0.5s;
 
     @media (min-width: $stop-scaling) {
       margin-left: 15px;

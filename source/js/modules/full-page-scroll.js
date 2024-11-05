@@ -1,6 +1,7 @@
 import throttle from 'lodash/throttle';
 import {Screens} from '../const/screens';
 import {animateText} from '../const/accentTypography.js';
+import {ColorTheme, setTheme} from "../const/colorTheme";
 
 export default class FullPageScroll {
   constructor() {
@@ -30,7 +31,15 @@ export default class FullPageScroll {
       this.reCalculateActiveScreenPosition(evt.deltaY);
       const currentPosition = this.activeScreen;
       if (currentPosition !== this.activeScreen) {
-        this.changePageDisplay();
+        if(this.previousScreen === Screens.MAIN) {
+          this.screenOverlay.classList.add("hiding");
+          setTimeout(() => {
+            this.changePageDisplay();
+            this.screenOverlay.classList.remove("hiding");
+          }, 300);
+        } else {
+          this.changePageDisplay();
+        }
       }
     }
     this.scrollFlag = false;
@@ -47,16 +56,26 @@ export default class FullPageScroll {
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.previousScreen = (newIndex < 0) ? null : this.activeScreen;
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
-    this.changePageDisplay();
+    if(this.previousScreen === Screens.MAIN) {
+      document.body.classList.add("hiding");
+      setTimeout(() => {
+        this.changePageDisplay();
+        document.body.classList.remove("hiding");
+      }, 300);
+    } else {
+      this.changePageDisplay();
+    }
   }
 
   changePageDisplay() {
     this.destroyTitleAnimations();
+    setTheme(ColorTheme.PURPLE);
     if(this.activeScreen === Screens.MAIN) {
       this.mainPageTitleAnimation = animateText(".intro__title");
       this.mainPageDateAnimation = animateText(".intro__date", 1200, false);
     }
     if(this.activeScreen === Screens.HISTORY) {
+      setTheme(ColorTheme.DARK_PURPLE);
       this.historyPageTitleAnimation = animateText(".slider__item-title");
     }
     if(this.activeScreen === Screens.PRIZES) {
