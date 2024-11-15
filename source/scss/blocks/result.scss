@@ -126,12 +126,6 @@
   margin: 0 auto 2rem;
   color: $c-light;
 
-  &--loose {
-    animation: fadeIn ease-in-out 0.5s;
-    animation-delay: 0.2s;
-    animation-fill-mode: both;
-  }
-
   @media (min-width: $stop-scaling) {
     margin: 0 auto 20px;
   }
