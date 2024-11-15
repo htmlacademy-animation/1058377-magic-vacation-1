@@ -17,6 +17,8 @@ export default () => {
         targetEl[0].classList.remove(`screen--hidden`);
         setTimeout(() =>{
           targetEl[0].classList.add(`screen--animation-active`);
+          const screenId = targetEl[0].getAttribute('id');
+          targetEl[0].querySelector(`#${screenId}Opacity`).beginElement();
         }, 100);
       });
     }
