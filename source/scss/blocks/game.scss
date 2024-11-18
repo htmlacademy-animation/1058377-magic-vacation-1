@@ -71,6 +71,9 @@
 }
 
 .game__counter {
+  display: flex;
+  min-width: 2.5em;
+  justify-content: flex-start;
   margin: 0;
   text-transform: uppercase;
   font-family: $font-alt;

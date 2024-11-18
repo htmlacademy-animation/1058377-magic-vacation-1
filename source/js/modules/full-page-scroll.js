@@ -2,6 +2,7 @@ import throttle from 'lodash/throttle';
 import {Screens} from '../const/screens';
 import {animateText} from '../const/accentTypography.js';
 import {ColorTheme, setTheme} from "../const/colorTheme";
+import Timer from "./timer";
 
 export default class FullPageScroll {
   constructor() {
@@ -17,6 +18,7 @@ export default class FullPageScroll {
     this.previousScreen = null;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+    this.timer = new Timer();
   }
 
   init() {
@@ -69,6 +71,7 @@ export default class FullPageScroll {
 
   changePageDisplay() {
     this.destroyTitleAnimations();
+    this.timer.stopTimer();
     setTheme(ColorTheme.PURPLE);
     if(this.activeScreen === Screens.MAIN) {
       this.mainPageTitleAnimation = animateText(".intro__title");
@@ -86,6 +89,7 @@ export default class FullPageScroll {
     }
     if(this.activeScreen === Screens.GAME) {
       this.gameTitleAnimation = animateText(".game__title");
+      this.timer.startTimer();
     }
     if(this.activeScreen === Screens.PRIZES && this.previousScreen === Screens.HISTORY) {
       this.screenOverlay.classList.add("loading");
