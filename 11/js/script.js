@@ -11027,16 +11027,20 @@ class Timer {
     this._minutesComponent = null;
     this._secondsComponent = null;
     this._countdownDuration = 5 * 60 * 1000;
-    this._fps = 300;
+    this._fps = 1;
     this._fpsInterval = 1000 / this._fps;
     this._then = Date.now();
     this._elapsed = 0
     this._startTime = null;
     this._endTime = null;
     this._running = false;
+    this._timerId = null;
   }
 
   startTimer() {
+    if (this._timerId) {
+      return;
+    }
     this._timeComponent = document.querySelector('.game__counter');
     this._minutesComponent = this._timeComponent.querySelector('.game__counter-minutes');
     this._secondsComponent = this._timeComponent.querySelector('.game__counter-seconds');
@@ -11049,7 +11053,10 @@ class Timer {
 
   stopTimer() {
     this._running = false;
-    cancelAnimationFrame(this._timerId)
+    if(this._timerId) {
+      cancelAnimationFrame(this._timerId);
+      this._timerId = null;
+    }
   }
 
   renderTime(milliseconds) {
@@ -11085,8 +11092,6 @@ class Timer {
     }
   }
 }
-
-
 
 
 /***/ }),
