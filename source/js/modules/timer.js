@@ -15,6 +15,9 @@ export default class Timer {
   }
 
   startTimer() {
+    if (this._timerId) {
+      return;
+    }
     this._timeComponent = document.querySelector('.game__counter');
     this._minutesComponent = this._timeComponent.querySelector('.game__counter-minutes');
     this._secondsComponent = this._timeComponent.querySelector('.game__counter-seconds');
@@ -29,6 +32,7 @@ export default class Timer {
     this._running = false;
     if(this._timerId) {
       cancelAnimationFrame(this._timerId);
+      this._timerId = null;
     }
   }
 
