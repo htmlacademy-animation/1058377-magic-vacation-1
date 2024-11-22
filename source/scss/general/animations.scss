@@ -186,5 +186,23 @@
   }
 }
 
+@keyframes moveRightToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20em);
+  }
+  5% {
+    opacity: 1;
+    transform: translateX(20em);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(20em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 

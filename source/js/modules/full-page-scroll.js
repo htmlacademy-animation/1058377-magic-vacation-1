@@ -1,8 +1,9 @@
 import throttle from 'lodash/throttle';
 import {Screens} from '../const/screens';
 import {animateText} from '../const/accentTypography.js';
-import {ColorTheme, setTheme} from "../const/colorTheme";
-import Timer from "./timer";
+import {ColorTheme, setTheme} from '../const/colorTheme';
+import Timer from './timer';
+import PrizeCounter from './prizeCounter';
 
 export default class FullPageScroll {
   constructor() {
@@ -19,6 +20,9 @@ export default class FullPageScroll {
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
     this.timer = new Timer();
+    this.travelsCounter = new PrizeCounter(`.prizes__desc--travels .prizes__desc-value`, [3]);
+    this.suitcasesCounter = new PrizeCounter(`.prizes__desc--suitcases .prizes__desc-value`, [1, 2, 3, 4, 5, 6, 7], 5000);
+    this.promosCounter = new PrizeCounter(`.prizes__desc--promos .prizes__desc-value`, [11, 185, 371, 514, 821, 849, 900], 7200);
   }
 
   init() {
@@ -72,6 +76,10 @@ export default class FullPageScroll {
   changePageDisplay() {
     this.destroyTitleAnimations();
     this.timer.stopTimer();
+    this.travelsCounter.stopCounter();
+    this.suitcasesCounter.stopCounter();
+    this.promosCounter.stopCounter();
+
     setTheme(ColorTheme.PURPLE);
     if(this.activeScreen === Screens.MAIN) {
       this.mainPageTitleAnimation = animateText(".intro__title");
@@ -83,6 +91,9 @@ export default class FullPageScroll {
     }
     if(this.activeScreen === Screens.PRIZES) {
       this.prizesPageTitleAnimation = animateText(".prizes__title");
+      if(this.previousScreen !== Screens.HISTORY) {
+        this.runPrizesAnimations();
+      }
     }
     if(this.activeScreen === Screens.RULES) {
       this.rulesTitleAnimation = animateText(".rules__title");
@@ -98,6 +109,7 @@ export default class FullPageScroll {
         this.changeVisibilityDisplay();
         this.emitChangeDisplayEvent();
         this.screenOverlay.classList.remove("loading");
+        this.runPrizesAnimations()
       }, 400);
     } else {
       this.changeVisibilityDisplay();
@@ -143,6 +155,19 @@ export default class FullPageScroll {
     } else {
       this.activeScreen = Math.max(0, --this.activeScreen);
     }
+  }
+
+  runPrizesAnimations() {
+    document.querySelector(`.prizes__item--journeys-svg`).setCurrentTime(0);
+    document.querySelector(`.prizes__item--cases-svg`).setCurrentTime(0);
+    document.querySelector(`.prizes__item--codes-svg`).setCurrentTime(0);
+    
+    document.querySelector(`#firstCloudOpacity`).beginElementAt(0.5);
+    this.travelsCounter.startCounter();
+    document.querySelector(`#readLeafTransform`).beginElementAt(5);
+    this.suitcasesCounter.startCounter();
+    document.querySelector(`#suitcaseOpacity`).beginElementAt(7);
+    this.promosCounter.startCounter();
   }
 
   destroyTitleAnimations() {

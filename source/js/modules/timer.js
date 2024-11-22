@@ -7,7 +7,7 @@ export default class Timer {
     this._fps = 1;
     this._fpsInterval = 1000 / this._fps;
     this._then = Date.now();
-    this._elapsed = 0
+    this._elapsed = 0;
     this._startTime = null;
     this._endTime = null;
     this._running = false;
@@ -18,9 +18,9 @@ export default class Timer {
     if (this._timerId) {
       return;
     }
-    this._timeComponent = document.querySelector('.game__counter');
-    this._minutesComponent = this._timeComponent.querySelector('.game__counter-minutes');
-    this._secondsComponent = this._timeComponent.querySelector('.game__counter-seconds');
+    this._timeComponent = document.querySelector(`.game__counter`);
+    this._minutesComponent = this._timeComponent.querySelector(`.game__counter-minutes`);
+    this._secondsComponent = this._timeComponent.querySelector(`.game__counter-seconds`);
     this.renderTime(this._countdownDuration);
     this._startTime = Date.now();
     this._endTime = this._startTime + this._countdownDuration;
@@ -30,7 +30,7 @@ export default class Timer {
 
   stopTimer() {
     this._running = false;
-    if(this._timerId) {
+    if (this._timerId) {
       cancelAnimationFrame(this._timerId);
       this._timerId = null;
     }
@@ -40,12 +40,14 @@ export default class Timer {
     const totalSeconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    this._minutesComponent.textContent = String(minutes).padStart(2, '0');
-    this._secondsComponent.textContent = String(seconds).padStart(2, '0');
+    this._minutesComponent.textContent = String(minutes).padStart(2, `0`);
+    this._secondsComponent.textContent = String(seconds).padStart(2, `0`);
   }
 
   draw() {
-    if (!this._running) return;
+    if (!this._running) {
+      return;
+    }
 
     const milliseconds = this._endTime - Date.now();
     if (milliseconds > 0) {
@@ -57,7 +59,9 @@ export default class Timer {
   }
 
   tick() {
-    if (!this._running) return;
+    if (!this._running) {
+      return;
+    }
 
     this._timerId = requestAnimationFrame(() => this.tick());
     const now = Date.now();
